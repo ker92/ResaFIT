@@ -12,7 +12,6 @@ class QrCodeController extends Controller
     {
         $user = Auth::user();
 
-        // Invalider les anciens tokens non utilisés
         QrToken::where('user_id', $user->id)
             ->whereNull('used_at')
             ->delete();

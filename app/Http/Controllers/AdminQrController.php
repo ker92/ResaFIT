@@ -35,7 +35,6 @@ class AdminQrController extends Controller
 
         $qrToken->update(['used_at' => now()]);
 
-        // Enregistrer le log d'accès (premier gym par défaut si non précisé)
         $gym = Gym::first();
         if ($gym) {
             AccessLog::create([

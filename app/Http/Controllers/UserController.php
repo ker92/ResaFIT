@@ -25,7 +25,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // Empêche suppression si admin
         if ($user->role && $user->role->name === 'admin') {
             return back()->with('error','Impossible de supprimer un administrateur');
         }

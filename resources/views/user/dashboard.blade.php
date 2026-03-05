@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <!-- ===== MODAL RESERVATION ===== -->
-
     <div id="reservationModal"
          class="fixed inset-0 bg-black/80 backdrop-blur-xl flex items-center justify-center hidden z-50">
 
@@ -17,10 +14,6 @@
             <form method="POST" action="{{ route('reservations.store') }}" class="space-y-5">
 
                 @csrf
-
-
-
-                <!-- Type cours -->
 
                 <div class="space-y-2">
 
@@ -41,7 +34,6 @@
 
                 </div>
 
-                <!-- Date -->
                 <div>
                     <label class="text-gray-300 text-sm">Date réservation</label>
 
@@ -49,7 +41,6 @@
                            class="w-full bg-white/20 border border-white/30 p-3 rounded-xl">
                 </div>
 
-                <!-- Heure -->
                 <div>
                     <label class="text-gray-300 text-sm">Heure réservation</label>
 
@@ -57,7 +48,6 @@
                            class="w-full bg-white/20 border border-white/30 p-3 rounded-xl">
                 </div>
 
-                <!-- Lieu -->
                 <div>
                     <label class="text-gray-300 text-sm">Lieu</label>
 
@@ -85,13 +75,10 @@
         </div>
     </div>
 
-    <!-- ===== DASHBOARD ===== -->
-
     <div class="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
 
         <div class="relative z-10 p-10 max-w-7xl mx-auto">
 
-            <!-- Header -->
             <div class="mb-12">
 
                 <h2 class="text-4xl font-bold flex items-center gap-3 text-purple-400">
@@ -105,10 +92,8 @@
                 </p>
             </div>
 
-            <!-- Cards -->
             <div class="grid md:grid-cols-3 gap-10">
 
-                <!-- Voir cours -->
                 <div class="group bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl text-center hover:scale-105 transition">
 
                     <i class="fa-solid fa-calendar-check text-purple-400 text-5xl mb-6"></i>
@@ -131,7 +116,6 @@
 
                 </div>
 
-                <!-- Réservation modal -->
                 <div class="group bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl text-center hover:scale-105 transition">
 
                     <i class="fa-solid fa-list-check text-blue-400 text-5xl mb-6"></i>
@@ -149,7 +133,6 @@
 
                 </div>
 
-                <!-- QR -->
                 <div class="group bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl text-center hover:scale-105 transition">
 
                     <i class="fa-solid fa-qrcode text-green-400 text-5xl mb-6"></i>

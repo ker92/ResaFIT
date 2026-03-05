@@ -4,7 +4,6 @@
 
     <div class="max-w-7xl mx-auto px-6 py-10">
 
-        <!-- Header -->
         <div class="flex justify-between items-center mb-12">
             <h1 class="text-4xl font-extrabold text-purple-400">
                 <i class="fa-solid fa-chart-line mr-3"></i>Dashboard Admin
@@ -14,7 +13,6 @@
         </span>
         </div>
 
-        <!-- STATS -->
         <div class="grid md:grid-cols-4 gap-6 mb-14">
             <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl text-center">
                 <i class="fa-solid fa-clock text-yellow-400 text-3xl mb-3"></i>
@@ -38,7 +36,6 @@
             </div>
         </div>
 
-        <!-- RESERVATIONS EN ATTENTE -->
         <div class="mb-16">
             <h2 class="text-2xl font-bold mb-6 text-purple-300">
                 <i class="fa-solid fa-hourglass-half mr-2"></i>Réservations en attente
@@ -70,7 +67,6 @@
                     </div>
 
                     <div class="flex gap-3">
-                        <!-- Valider via POST -->
                         <form method="POST" action="{{ route('admin.reservation.validate', $reservation->id) }}">
                             @csrf
                             <button type="submit"
@@ -79,7 +75,6 @@
                             </button>
                         </form>
 
-                        <!-- Refuser via POST -->
                         <form method="POST" action="{{ route('admin.reservation.reject', $reservation->id) }}">
                             @csrf
                             <button type="submit"
@@ -97,7 +92,6 @@
             @endforelse
         </div>
 
-        <!-- COURS -->
         <div class="mb-16">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-purple-300">
@@ -143,8 +137,6 @@
                 <p class="text-gray-400">Aucun cours créé.</p>
             @endforelse
         </div>
-
-        <!-- UTILISATEURS -->
         <div>
             <h2 class="text-2xl font-bold mb-6 text-purple-300">
                 <i class="fa-solid fa-users mr-2"></i>Gestion des utilisateurs

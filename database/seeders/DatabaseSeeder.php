@@ -13,11 +13,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Création des rôles
         Role::create(['nom' => 'admin']);
         Role::create(['nom' => 'user']);
 
-        // Création de l'admin
         User::create([
             'name'     => 'Admin ResaFit',
             'email'    => 'admin@resafit.com',
@@ -25,7 +23,6 @@ class DatabaseSeeder extends Seeder
             'role_id'  => 1,
         ]);
 
-        // Création d'un utilisateur de test
         User::create([
             'name'     => 'John Doe',
             'email'    => 'user@resafit.com',
@@ -33,11 +30,9 @@ class DatabaseSeeder extends Seeder
             'role_id'  => 2,
         ]);
 
-        // Création de salles de sport
         $gym1 = Gym::create(['nom' => 'ResaFit Paris', 'ville' => 'Paris', 'pays' => 'France']);
         $gym2 = Gym::create(['nom' => 'ResaFit Lyon',  'ville' => 'Lyon',  'pays' => 'France']);
 
-        // Création de cours
         Course::create([
             'gym_id'           => $gym1->id,
             'nom'              => 'Yoga Matinal',

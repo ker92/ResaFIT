@@ -11,12 +11,7 @@
 
 <body class="bg-black min-h-screen text-white">
 
-<!-- Sidebar + Content Layout -->
 <div class="flex">
-
-    <!-- =========================
-    SIDEBAR MODERNE
-    ========================= -->
 
     <div class="w-64 h-screen bg-white/10 backdrop-blur-xl border-r border-white/10 p-6 hidden md:block">
 

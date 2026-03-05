@@ -12,7 +12,6 @@
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
 
-<!-- NAVBAR -->
 <nav class="fixed top-0 w-full bg-black/70 backdrop-blur-xl z-50 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
@@ -59,7 +58,6 @@
     </div>
 </nav>
 
-<!-- MESSAGES FLASH -->
 <div class="pt-20 px-6">
     @if(session('success'))
         <div class="max-w-7xl mx-auto mb-4 bg-green-600/20 border border-green-500 text-green-300
@@ -89,7 +87,6 @@
     @endif
 </div>
 
-<!-- CONTENU -->
 @yield('content')
 
 </body>
