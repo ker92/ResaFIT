@@ -19,15 +19,16 @@ Route::get('/mentions-legales', fn() => view('mentions-legales'))->name('mention
 Route::get('/confidentialite',  fn() => view('confidentialite'))->name('confidentialite');
 Route::get('/cgu',              fn() => view('cgu'))->name('cgu');
 
+Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login',   [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register',[AuthController::class, 'register']);
+
 Route::middleware('guest')->group(function () {
-    Route::get('/login',              [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login',             [AuthController::class, 'login']);
-    Route::get('/register',           [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register',          [AuthController::class, 'register']);
-    Route::get('/forgot-password',    [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-    Route::post('/forgot-password',   [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/forgot-password',        [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/forgot-password',       [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-    Route::post('/reset-password',    [ResetPasswordController::class, 'reset'])->name('password.update');
+    Route::post('/reset-password',        [ResetPasswordController::class, 'reset'])->name('password.update');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
