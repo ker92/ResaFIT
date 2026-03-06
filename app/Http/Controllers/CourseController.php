@@ -20,7 +20,7 @@ class CourseController extends Controller
     public function create()
     {
         $gyms = Gym::all();
-        return view('courses.create', compact('gyms'));
+        return view('admin.courses.create', compact('gyms'));
     }
 
     public function store(Request $request)
@@ -50,7 +50,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
         $gyms   = Gym::all();
 
-        return view('courses.edit', compact('course', 'gyms'));
+        return view('admin.courses.edit', compact('course', 'gyms'));
     }
 
     public function update(Request $request, $id)

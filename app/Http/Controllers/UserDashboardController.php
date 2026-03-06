@@ -20,6 +20,12 @@ class UserDashboardController extends Controller
             ->take(5)
             ->get();
 
-        return view('user.dashboard', compact('courses', 'mesReservations'));
+        $coursValides = Reservation::with('course')
+            ->where('user_id', auth()->id())
+            ->where('status', 'approved')
+            ->latest()
+            ->get();
+
+        return view('user.dashboard', compact('courses', 'mesReservations', 'coursValides'));
     }
 }

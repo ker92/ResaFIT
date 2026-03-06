@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\QrToken;
 use App\Models\AccessLog;
 use App\Models\Gym;
+use App\Models\Reservation;
 
 class AdminQrController extends Controller
 {
@@ -34,6 +35,14 @@ class AdminQrController extends Controller
         }
 
         $qrToken->update(['used_at' => now()]);
+        $reservation = Reservation::where('user_id', $qrToken->user_id)
+            ->where('status', 'approved')
+            ->latest()
+            ->first();
+
+        if ($reservation) {
+            $reservation->update(['status' => 'completed']);
+        }
 
         $gym = Gym::first();
         if ($gym) {

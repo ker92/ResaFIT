@@ -31,31 +31,15 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'course_id'         => 'required|exists:courses,id',
             'type_cours'        => 'required|string',
             'date_reservation'  => 'required|date',
             'heure_reservation' => 'required',
             'lieu'              => 'required|string',
         ]);
 
-        $course = Course::findOrFail($request->course_id);
-
-        if ($course->estComplet()) {
-            return back()->with('error', 'Ce cours est complet.');
-        }
-
-        $dejaReserve = Reservation::where('user_id', auth()->id())
-            ->where('course_id', $course->id)
-            ->whereIn('status', ['pending', 'approved'])
-            ->exists();
-
-        if ($dejaReserve) {
-            return back()->with('error', 'Vous avez déjà une réservation pour ce cours.');
-        }
-
         Reservation::create([
             'user_id'           => auth()->id(),
-            'course_id'         => $course->id,
+            'course_id'         => null,
             'type_cours'        => $request->type_cours,
             'date_reservation'  => $request->date_reservation,
             'heure_reservation' => $request->heure_reservation,

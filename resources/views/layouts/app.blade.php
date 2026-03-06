@@ -62,10 +62,7 @@
                 <a href="{{ route('user.dashboard') }}" class="nav-link">
                     <i class="fa-solid fa-house"></i><span>Accueil</span>
                 </a>
-                <a href="{{ route('courses.index') }}" class="nav-link">
-                    <i class="fa-solid fa-dumbbell"></i><span>Cours</span>
-                </a>
-                <a href="{{ route('reservations.index') }}" class="nav-link">
+                <a href="{{ route('user.mes-cours') }}" class="nav-link">
                     <i class="fa-solid fa-calendar"></i><span>Réservations</span>
                 </a>
             @endif

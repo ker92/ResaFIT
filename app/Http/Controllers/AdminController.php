@@ -19,12 +19,14 @@ class AdminController extends Controller
             ->latest()
             ->get();
 
+        $approvedReservations = Reservation::where('status', 'approved')->count();
         $courses = Course::with('gym')->latest()->get();
         $users   = User::where('role_id', '!=', 1)->latest()->get();
         $gyms    = Gym::all();
 
         return view('admin.dashboard', compact(
             'pendingReservations',
+            'approvedReservations',
             'courses',
             'users',
             'gyms'

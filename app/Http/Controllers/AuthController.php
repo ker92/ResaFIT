@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
@@ -42,7 +43,20 @@ class AuthController extends Controller
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(12)
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised(),
+            ],
+        ], [
+            'password.min'        => 'Le mot de passe doit contenir au moins 12 caractères.',
+            'password.mixed_case' => 'Le mot de passe doit contenir au moins une majuscule et une minuscule.',
+            'password.numbers'    => 'Le mot de passe doit contenir au moins un chiffre.',
+            'password.symbols'    => 'Le mot de passe doit contenir au moins un symbole (ex: !@#$%).',
         ]);
 
         User::create([

@@ -2,7 +2,7 @@
 
 @section('content')
     <style>
-        .admin-wrap { max-width: 1300px; margin: 0 auto; padding: 48px; }
+        .admin-wrap { max-width: 1300px; margin: 0 auto; padding: 48px; position: relative; z-index: 1; }
         .page-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--acid); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 8px; }
         .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 72px); line-height: 1; letter-spacing: -1px; margin-bottom: 48px; }
 
@@ -21,11 +21,8 @@
         .section-title i { color: var(--acid); font-size: 18px; }
         .section-count { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gray); background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 20px; }
 
-        .btn-add { background: var(--acid); color: var(--dark); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; }
-        .btn-add:hover { background: #d4f550; transform: translateY(-1px); }
-
-        .card { background: var(--mid); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: border-color 0.2s, background 0.2s; }
-        .card:hover { border-color: rgba(255,255,255,0.12); background: #131313; }
+        .card { background: rgba(17,17,17,0.85); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: border-color 0.2s, background 0.2s; backdrop-filter: blur(8px); }
+        .card:hover { border-color: rgba(255,255,255,0.12); background: rgba(19,19,19,0.9); }
         .card-info { flex: 1; min-width: 0; }
         .card-name { font-size: 15px; font-weight: 500; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .card-meta { display: flex; flex-wrap: wrap; gap: 16px; }
@@ -47,13 +44,17 @@
         .progress-bar { height: 2px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 10px; overflow: hidden; max-width: 200px; }
         .progress-fill { height: 100%; background: var(--acid); border-radius: 2px; }
 
-        .empty-state { text-align: center; padding: 40px; color: var(--gray); background: var(--mid); border: 1px solid var(--border); border-radius: 14px; }
+        .empty-state { text-align: center; padding: 40px; color: var(--gray); background: rgba(17,17,17,0.85); border: 1px solid var(--border); border-radius: 14px; backdrop-filter: blur(8px); }
         .empty-state i { font-size: 28px; margin-bottom: 10px; display: block; opacity: 0.4; }
         .empty-state p { font-size: 13px; }
 
         @media (max-width: 1024px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .admin-wrap { padding: 24px 20px; } .stats-grid { grid-template-columns: 1fr 1fr; } .card { flex-direction: column; align-items: flex-start; } }
     </style>
+
+    {{-- BACKGROUND --}}
+    <div style="position:fixed; inset:0; z-index:0; background-image:url('/images/dashboard-user.jpg'); background-size:cover; background-position:center;"></div>
+    <div style="position:fixed; inset:0; z-index:0; background:linear-gradient(135deg, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.75) 100%);"></div>
 
     <div class="admin-wrap">
 
@@ -68,8 +69,8 @@
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><i class="fa-solid fa-dumbbell" style="color:var(--acid)"></i></div>
-                <div class="stat-num">{{ $courses->count() }}</div>
-                <div class="stat-lbl">Cours actifs</div>
+                <div class="stat-num">{{ $approvedReservations }}</div>
+                <div class="stat-lbl">Cours validés</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><i class="fa-solid fa-users" style="color:#60a5fa"></i></div>
@@ -99,7 +100,13 @@
                             <span class="badge-pending">En attente</span>
                         </div>
                         <div class="card-meta">
-                            <span class="card-meta-item"><i class="fa-solid fa-dumbbell"></i>{{ optional($reservation->course)->nom ?? 'Cours supprimé' }}@if($reservation->course) — {{ optional($reservation->course->gym)->nom }}@endif</span>
+                            <span class="card-meta-item">
+                                <i class="fa-solid fa-dumbbell"></i>
+                                {{ optional($reservation->course)->nom ?? 'Sans cours assigné' }}
+                                @if($reservation->course && $reservation->course->gym)
+                                    — {{ $reservation->course->gym->nom }}
+                                @endif
+                            </span>
                             <span class="card-meta-item"><i class="fa-solid fa-calendar"></i>{{ $reservation->date_reservation->format('d/m/Y') }} à {{ $reservation->heure_reservation }}</span>
                             <span class="card-meta-item"><i class="fa-solid fa-tag"></i>{{ ucfirst($reservation->type_cours) }} — {{ $reservation->lieu }}</span>
                         </div>
@@ -130,9 +137,6 @@
                     Cours
                     <span class="section-count">{{ $courses->count() }}</span>
                 </div>
-                <a href="{{ route('admin.courses.create') }}" class="btn-add">
-                    <i class="fa-solid fa-plus"></i> Ajouter un cours
-                </a>
             </div>
             @forelse($courses as $course)
                 <div class="card">
