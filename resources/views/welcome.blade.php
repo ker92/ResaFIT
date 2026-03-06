@@ -44,8 +44,7 @@
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(200,241,53,0.25); }
         .btn-ghost { color: var(--light); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; opacity: 0.6; transition: all 0.2s; }
         .btn-ghost:hover { opacity: 1; gap: 16px; }
-        .scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: revealUp 0.8s ease forwards 1.4s; }
-        .scroll-hint span { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--gray); text-transform: uppercase; }
+
         .scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--acid), transparent); animation: scrollDrop 2s ease-in-out infinite; }
         @keyframes scrollDrop { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
         .marquee-section { border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 0; overflow: hidden; background: var(--mid); }
@@ -149,10 +148,7 @@
             </div>
         </div>
     </div>
-    <div class="scroll-hint">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-    </div>
+
 </section>
 
 <div class="marquee-section">
